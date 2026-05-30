@@ -25,7 +25,8 @@
         "phpunit/phpunit": "^13.1",
         "mockery/mockery": "^1.6",
         "rector/rector": "^2.4",
-        "captainhook/captainhook": "^5.29"
+        "captainhook/captainhook": "^5.29",
+        "captainhook/hook-installer": "^1.0"
     },
     "scripts": {
         "style:check": "php-cs-fixer check -vvv --diff",
@@ -38,5 +39,10 @@
             "@stan:check",
             "@rector:check"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "captainhook/hook-installer": true
+        }
     }
 }
