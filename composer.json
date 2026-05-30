@@ -1,0 +1,48 @@
+{
+    "name": "gado/task-tracker",
+    "description": "PHP CLI task tracker",
+    "type": "project",
+    "require": {
+        "php": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "abdelrahman-gado"
+        }
+    ],
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-mockery": "^2.0",
+        "phpunit/phpunit": "^13.1",
+        "mockery/mockery": "^1.6",
+        "rector/rector": "^2.4",
+        "captainhook/captainhook": "^5.29",
+        "captainhook/hook-installer": "^1.0"
+    },
+    "scripts": {
+        "style:check": "php-cs-fixer check -vvv --diff",
+        "style:fix": "php-cs-fixer fix",
+        "stan:check": "phpstan analyse",
+        "rector:check": "rector process --dry-run --debug",
+        "test": [
+            "phpunit",
+            "@style:check",
+            "@stan:check",
+            "@rector:check"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "captainhook/hook-installer": true
+        }
+    }
+}
