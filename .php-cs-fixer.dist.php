@@ -11,10 +11,8 @@ return (new Config())
     ->setRules([
         '@auto' => true,
         '@auto:risky' => true,
-        '@PhpCsFixer' => true,
-        '@PhpCsFixer:risky' => true,
-    ])
-    ->setRules([
+        '@PSR12' => true,
+        '@PSR12:risky' => true,
         'array_push' => true,
         'backtick_to_shell_exec' => true,
         'declare_strict_types' => true,
