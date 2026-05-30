@@ -11,6 +11,14 @@ return (new Config())
     ->setRules([
         '@auto' => true,
         '@auto:risky' => true,
+        '@PSR12' => true,
+        '@PSR12:risky' => true,
+        'array_push' => true,
+        'backtick_to_shell_exec' => true,
+        'declare_strict_types' => true,
+        'final_class' => true,
+        'strict_comparison' => true,
+        'modernize_strpos' => true,
     ])
     // 💡 by default, Fixer looks for `*.php` files excluding `./vendor/` - here, you can groom this config
     ->setFinder(
@@ -21,9 +29,9 @@ return (new Config())
             // ->append([__DIR__.'/bin-entry-file'])
             // 💡 folders to exclude, if any
             ->exclude(['vendor', 'laradock', '.*'])
-            // 💡 path patterns to exclude, if any
-            // ->notPath([/* ... */])
-            // 💡 extra configs
-            // ->ignoreDotFiles(false) // true by default in v3, false in v4 or future mode
-            // ->ignoreVCS(true) // true by default
+        // 💡 path patterns to exclude, if any
+        // ->notPath([/* ... */])
+        // 💡 extra configs
+        // ->ignoreDotFiles(false) // true by default in v3, false in v4 or future mode
+        // ->ignoreVCS(true) // true by default
     );
