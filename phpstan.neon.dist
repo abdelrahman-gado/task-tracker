@@ -4,4 +4,4 @@ parameters:
         - src
         - tests
 includes:
-    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon

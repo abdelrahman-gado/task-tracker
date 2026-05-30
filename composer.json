@@ -10,6 +10,11 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "abdelrahman-gado"
@@ -26,7 +31,8 @@
         "mockery/mockery": "^1.6",
         "rector/rector": "^2.4",
         "captainhook/captainhook": "^5.29",
-        "captainhook/hook-installer": "^1.0"
+        "captainhook/hook-installer": "^1.0",
+        "brianium/paratest": "^7.22"
     },
     "scripts": {
         "style:check": "php-cs-fixer check -vvv --diff",
@@ -34,10 +40,10 @@
         "stan:check": "phpstan analyse",
         "rector:check": "rector process --dry-run --debug",
         "test": [
-            "phpunit",
             "@style:check",
             "@stan:check",
-            "@rector:check"
+            "@rector:check",
+            "phpunit"
         ]
     },
     "config": {
