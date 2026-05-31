@@ -15,3 +15,5 @@ phpunit.xml
 # VSCode
 .vscode/
 
+# Qodo
+.qodo/

@@ -39,6 +39,7 @@
         "style:fix": "php-cs-fixer fix",
         "stan:check": "phpstan analyse",
         "rector:check": "rector process --dry-run --debug",
+        "rector:fix": "rector process --debug",
         "test": [
             "@style:check",
             "@stan:check",
