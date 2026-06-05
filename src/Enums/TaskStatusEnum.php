@@ -11,13 +11,13 @@ enum TaskStatusEnum: string
     /**
      * @return array<string>
      */
-    public static function getStatuses(): array
+    public static function getCaseValues(): array
     {
         return array_column(self::cases(), 'value');
     }
 
     public static function isValidStatus(?string $status): bool
     {
-        return $status && in_array($status, self::getStatuses(), true);
+        return in_array($status, self::getCaseValues(), true);
     }
 }

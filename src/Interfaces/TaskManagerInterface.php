@@ -2,20 +2,22 @@
 
 namespace App\Interfaces;
 
+use App\Entities\Task;
+
 interface TaskManagerInterface
 {
-    public function add(string $taskDescription): bool;
+    public function add(string $taskDescription): Task;
 
     /**
-     * @return array{id?: string, description?: string, status?: string, created_at?: string, updated_at?: string}[]
+     * @return Task[]
      */
     public function list(?string $taskStatus = null): array;
 
-    public function update(int $taskId, string $newTaskDescription): bool;
+    public function update(int $taskId, string $newTaskDescription): ?Task;
 
-    public function delete(int $taskId): bool;
+    public function delete(int $taskId): ?Task;
 
-    public function markDone(int $taskId): bool;
+    public function markDone(int $taskId): ?Task;
 
-    public function markInProgress(int $taskId): bool;
+    public function markInProgress(int $taskId): ?Task;
 }

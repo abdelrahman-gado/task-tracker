@@ -8,12 +8,14 @@ use App\Interfaces\TaskManagerInterface;
 
 final readonly class TaskManager implements TaskManagerInterface
 {
+    public function __construct(private TaskStorageHandler $taskStorageHandler) {}
+
     /**
      * @inheritDoc
      */
-    public function add(string $taskDescription): ?Task
+    public function add(string $taskDescription): Task
     {
-        return new Task(id: 1, description: $taskDescription);
+        return $this->taskStorageHandler->insert($taskDescription);
     }
 
     /**
@@ -21,7 +23,7 @@ final readonly class TaskManager implements TaskManagerInterface
      */
     public function delete(int $taskId): ?Task
     {
-        return new Task(id: $taskId, description: 'Deleted Task');
+        return $this->taskStorageHandler->delete($taskId);
     }
 
     /**
@@ -30,11 +32,7 @@ final readonly class TaskManager implements TaskManagerInterface
      */
     public function list(?string $taskStatus = null): array
     {
-        return [
-            new Task(id: 1, description: 'Sample Task 1', status: TaskStatusEnum::TODO),
-            new Task(id: 2, description: 'Sample Task 2', status: TaskStatusEnum::IN_PROGRESS),
-            new Task(id: 3, description: 'Sample Task 3', status: TaskStatusEnum::DONE),
-        ];
+        return $this->taskStorageHandler->list($taskStatus);
     }
 
     /**
@@ -42,7 +40,7 @@ final readonly class TaskManager implements TaskManagerInterface
      */
     public function markDone(int $taskId): ?Task
     {
-        return new Task(id: $taskId, description: 'Marked Done Task', status: TaskStatusEnum::DONE);
+        return $this->taskStorageHandler->update($taskId, ['status' => TaskStatusEnum::DONE]);
     }
 
     /**
@@ -50,7 +48,7 @@ final readonly class TaskManager implements TaskManagerInterface
      */
     public function markInProgress(int $taskId): ?Task
     {
-        return new Task(id: $taskId, description: 'Marked In Progress Task', status: TaskStatusEnum::IN_PROGRESS);
+        return $this->taskStorageHandler->update($taskId, ['status' => TaskStatusEnum::IN_PROGRESS]);
     }
 
     /**
@@ -58,6 +56,6 @@ final readonly class TaskManager implements TaskManagerInterface
      */
     public function update(int $taskId, string $newTaskDescription): ?Task
     {
-        return new Task(id: $taskId, description: $newTaskDescription);
+        return $this->taskStorageHandler->update($taskId, ['description' => $newTaskDescription]);
     }
 }

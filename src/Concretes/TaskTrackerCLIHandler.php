@@ -34,7 +34,7 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
      */
     private function addAction(?array $args): void
     {
-        $taskDescription = $args[0]  ?? null;
+        $taskDescription = $args[0] ?? null;
         if (!$taskDescription) {
             echo "Error: Task description is required for 'add' action.
                 use 'php task-cli.php help' for usage instructions.\n";
@@ -42,11 +42,7 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         }
 
         $task = $this->taskManager->add($taskDescription);
-        if ($task) {
-            echo "Task added successfully (ID: {$task->id})\n"; // TODO: need to return Task object to output the ID here.
-        } else {
-            echo "Error: Failed to add task. Please try again.\n";
-        }
+        echo "Task added successfully (ID: {$task->id})\n";
     }
 
     /**
@@ -55,9 +51,9 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
     private function listAction(?array $args): void
     {
         $taskStatus = $args[0] ?? null;
-        if (!TaskStatusEnum::isValidStatus($taskStatus)) {
+        if ($taskStatus && !TaskStatusEnum::isValidStatus($taskStatus)) {
             echo sprintf("Error: Invalid task status '%s'. Valid statuses are: ", $taskStatus)
-                . implode(', ', TaskStatusEnum::getStatuses()) . ".\n";
+                . implode(', ', TaskStatusEnum::getCaseValues()) . ".\n";
             return;
         }
 
@@ -81,8 +77,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         }
 
         $task = $this->taskManager->update((int) $taskId, $newTaskDescription);
-        if ($task) {
-            echo "Task with ID {$taskId} has been updated successfully.\n";
+        if ($task instanceof \App\Entities\Task) {
+            echo "Task with ID {$task->id} has been updated successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
         }
@@ -101,8 +97,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         }
 
         $task = $this->taskManager->delete((int) $taskId);
-        if ($task) {
-            echo "Task with ID {$taskId} has been deleted successfully.\n";
+        if ($task instanceof \App\Entities\Task) {
+            echo "Task with ID {$task->id} has been deleted successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
         }
@@ -121,8 +117,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         }
 
         $task = $this->taskManager->markDone((int) $taskId);
-        if ($task) {
-            echo "Task with ID {$taskId} has been marked as done successfully.\n";
+        if ($task instanceof \App\Entities\Task) {
+            echo "Task with ID {$task->id} has been marked as done successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
         }
@@ -141,8 +137,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         }
 
         $task = $this->taskManager->markInProgress((int) $taskId);
-        if ($task) {
-            echo "Task with ID {$taskId} has been marked as in progress successfully.\n";
+        if ($task instanceof \App\Entities\Task) {
+            echo "Task with ID {$task->id} has been marked as in progress successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
         }
