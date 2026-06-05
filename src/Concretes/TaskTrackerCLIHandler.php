@@ -41,9 +41,9 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        $added = $this->taskManager->add($taskDescription);
-        if ($added) {
-            echo "Task added successfully\n"; // TODO: need to return Task object to output the ID here.
+        $task = $this->taskManager->add($taskDescription);
+        if ($task) {
+            echo "Task added successfully (ID: {$task->id})\n"; // TODO: need to return Task object to output the ID here.
         } else {
             echo "Error: Failed to add task. Please try again.\n";
         }
@@ -61,16 +61,9 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        // TODO: needs to be refactored to return Task objects instead of arrays.
         $tasks = $this->taskManager->list($taskStatus);
         foreach ($tasks as $task) {
-            $taskId = $task['id'] ?? 'N/A';
-            $taskDescription = $task['description'] ?? 'N/A';
-            $taskStatus = $task['status'] ?? 'N/A';
-            $taskCreatedAt = $task['created_at'] ?? 'N/A';
-            $taskUpdatedAt = $task['updated_at'] ?? 'N/A';
-            echo "ID: {$taskId} | Description: {$taskDescription} | Status: {$taskStatus}
-            | CreatedAt: {$taskCreatedAt}\n | UpdatedAt: {$taskUpdatedAt}\n";
+            echo $task . "\n";
         }
     }
 
@@ -87,8 +80,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        $updated = $this->taskManager->update((int) $taskId, $newTaskDescription);
-        if ($updated) {
+        $task = $this->taskManager->update((int) $taskId, $newTaskDescription);
+        if ($task) {
             echo "Task with ID {$taskId} has been updated successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
@@ -107,8 +100,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        $deleted = $this->taskManager->delete((int) $taskId);
-        if ($deleted) {
+        $task = $this->taskManager->delete((int) $taskId);
+        if ($task) {
             echo "Task with ID {$taskId} has been deleted successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
@@ -127,8 +120,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        $marked = $this->taskManager->markDone((int) $taskId);
-        if ($marked) {
+        $task = $this->taskManager->markDone((int) $taskId);
+        if ($task) {
             echo "Task with ID {$taskId} has been marked as done successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";
@@ -147,8 +140,8 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
             return;
         }
 
-        $marked = $this->taskManager->markInProgress((int) $taskId);
-        if ($marked) {
+        $task = $this->taskManager->markInProgress((int) $taskId);
+        if ($task) {
             echo "Task with ID {$taskId} has been marked as in progress successfully.\n";
         } else {
             echo "Error: Task with ID {$taskId} not found.\n";

@@ -2,6 +2,8 @@
 
 namespace App\Concretes;
 
+use App\Entities\Task;
+use App\Enums\TaskStatusEnum;
 use App\Interfaces\TaskManagerInterface;
 
 final readonly class TaskManager implements TaskManagerInterface
@@ -9,57 +11,53 @@ final readonly class TaskManager implements TaskManagerInterface
     /**
      * @inheritDoc
      */
-    public function add(string $taskDescription): bool
+    public function add(string $taskDescription): ?Task
     {
-        return false;
+        return new Task(id: 1, description: $taskDescription);
     }
 
     /**
      * @inheritDoc
      */
-    public function delete(int $taskId): bool
+    public function delete(int $taskId): ?Task
     {
-        return false;
+        return new Task(id: $taskId, description: 'Deleted Task');
     }
 
     /**
      * @inheritDoc
-     * @return array{id?: string, description?: string, status?: string, created_at?: string, updated_at?: string}[]
+     * @return Task[]
      */
     public function list(?string $taskStatus = null): array
     {
         return [
-            [
-                'id' => '1',
-                'description' => 'Sample Task',
-                'status' => 'todo',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
+            new Task(id: 1, description: 'Sample Task 1', status: TaskStatusEnum::TODO),
+            new Task(id: 2, description: 'Sample Task 2', status: TaskStatusEnum::IN_PROGRESS),
+            new Task(id: 3, description: 'Sample Task 3', status: TaskStatusEnum::DONE),
         ];
     }
 
     /**
      * @inheritDoc
      */
-    public function markDone(int $taskId): bool
+    public function markDone(int $taskId): ?Task
     {
-        return false;
+        return new Task(id: $taskId, description: 'Marked Done Task', status: TaskStatusEnum::DONE);
     }
 
     /**
      * @inheritDoc
      */
-    public function markInProgress(int $taskId): bool
+    public function markInProgress(int $taskId): ?Task
     {
-        return false;
+        return new Task(id: $taskId, description: 'Marked In Progress Task', status: TaskStatusEnum::IN_PROGRESS);
     }
 
     /**
      * @inheritDoc
      */
-    public function update(int $taskId, string $newTaskDescription): bool
+    public function update(int $taskId, string $newTaskDescription): ?Task
     {
-        return false;
+        return new Task(id: $taskId, description: $newTaskDescription);
     }
 }

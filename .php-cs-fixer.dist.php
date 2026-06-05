@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
@@ -19,6 +17,7 @@ return (new Config())
         'final_class' => true,
         'strict_comparison' => true,
         'modernize_strpos' => true,
+        'blank_line_after_opening_tag' => false,
     ])
     // 💡 by default, Fixer looks for `*.php` files excluding `./vendor/` - here, you can groom this config
     ->setFinder(
