@@ -2,64 +2,60 @@
 
 namespace App\Concretes;
 
+use App\Entities\Task;
+use App\Enums\TaskStatusEnum;
 use App\Interfaces\TaskManagerInterface;
 
 final readonly class TaskManager implements TaskManagerInterface
 {
+    public function __construct(private TaskStorageHandler $taskStorageHandler) {}
+
     /**
      * @inheritDoc
      */
-    public function add(string $taskDescription): bool
+    public function add(string $taskDescription): Task
     {
-        return false;
+        return $this->taskStorageHandler->insert($taskDescription);
     }
 
     /**
      * @inheritDoc
      */
-    public function delete(int $taskId): bool
+    public function delete(int $taskId): ?Task
     {
-        return false;
+        return $this->taskStorageHandler->delete($taskId);
     }
 
     /**
      * @inheritDoc
-     * @return array{id?: string, description?: string, status?: string, created_at?: string, updated_at?: string}[]
+     * @return Task[]
      */
     public function list(?string $taskStatus = null): array
     {
-        return [
-            [
-                'id' => '1',
-                'description' => 'Sample Task',
-                'status' => 'todo',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-        ];
+        return $this->taskStorageHandler->list($taskStatus);
     }
 
     /**
      * @inheritDoc
      */
-    public function markDone(int $taskId): bool
+    public function markDone(int $taskId): ?Task
     {
-        return false;
+        return $this->taskStorageHandler->update($taskId, ['status' => TaskStatusEnum::DONE]);
     }
 
     /**
      * @inheritDoc
      */
-    public function markInProgress(int $taskId): bool
+    public function markInProgress(int $taskId): ?Task
     {
-        return false;
+        return $this->taskStorageHandler->update($taskId, ['status' => TaskStatusEnum::IN_PROGRESS]);
     }
 
     /**
      * @inheritDoc
      */
-    public function update(int $taskId, string $newTaskDescription): bool
+    public function update(int $taskId, string $newTaskDescription): ?Task
     {
-        return false;
+        return $this->taskStorageHandler->update($taskId, ['description' => $newTaskDescription]);
     }
 }
