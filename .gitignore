@@ -1,4 +1,5 @@
 tasks.json
+tasks.test.json
 /vendor/
 
 # PHP CS Fixer

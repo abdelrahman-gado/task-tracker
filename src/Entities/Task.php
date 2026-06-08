@@ -58,4 +58,11 @@ final class Task implements Arrayable, \Stringable
             'updatedAt' => $this->updatedAt->format(DateTimeImmutable::ATOM),
         ];
     }
+
+    public function equals(self $other): bool
+    {
+        return $this->id === $other->id
+            && $this->status === $other->status
+            && $this->description === $other->description;
+    }
 }
