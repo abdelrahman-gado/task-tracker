@@ -60,7 +60,7 @@ final readonly class TaskStorageHandler
     /**
      * @return Task[]
      */
-    public function list(?string $taskStatus): array
+    public function list(?string $taskStatus = null): array
     {
         $tasks = $this->load();
         if (!$taskStatus) {

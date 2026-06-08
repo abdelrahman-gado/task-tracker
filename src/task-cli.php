@@ -6,7 +6,6 @@ use App\Concretes\JsonFileStorageHandler;
 use App\Concretes\TaskManager;
 use App\Concretes\TaskStorageHandler;
 use App\Concretes\TaskTrackerCLIHandler;
-use App\Interfaces\StorageInterface;
 use App\Interfaces\TaskManagerInterface;
 use App\Interfaces\TaskTrackerIOHandlerInterface;
 

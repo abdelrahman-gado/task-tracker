@@ -2,7 +2,6 @@
 
 namespace App\Concretes;
 
-use App\Interfaces\Arrayable;
 use App\Interfaces\StorageInterface;
 use Exception;
 

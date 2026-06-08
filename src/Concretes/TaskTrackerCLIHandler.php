@@ -15,7 +15,7 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
      * @inheritDoc
      * @param string[]|null $args
      */
-    public function handleInput(?string $action, ?array $args): void
+    public function handleInput(?string $action, ?array $args = []): void
     {
         $action = $action ? strtolower($action) : '';
         match ($action) {
@@ -36,8 +36,10 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
     {
         $taskDescription = $args[0] ?? null;
         if (!$taskDescription) {
-            echo "Error: Task description is required for 'add' action.
-                use 'php task-cli.php help' for usage instructions.\n";
+            echo <<<ERROR
+                Error: Task description is required for 'add' action.
+                use 'php task-cli.php help' for usage instructions.\n
+                ERROR;
             return;
         }
 
@@ -71,8 +73,10 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
         $taskId = $args[0] ?? null;
         $newTaskDescription = $args[1] ?? null;
         if (!$taskId || !$newTaskDescription) {
-            echo "Error: Both task ID and new task description are required for 'update' action.
-                use 'php task-cli.php help' for usage instructions.\n";
+            echo <<<ERROR
+                Error: Task description is required for 'update' action.
+                use 'php task-cli.php help' for usage instructions.\n
+                ERROR;
             return;
         }
 
@@ -91,8 +95,10 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
     {
         $taskId = $args[0] ?? null;
         if (!$taskId) {
-            echo "Error: Task ID is required for 'delete' action.
-                use 'php task-cli.php help' for usage instructions.\n";
+            echo <<<ERROR
+                Error: Task description is required for 'delete' action.
+                use 'php task-cli.php help' for usage instructions.\n
+                ERROR;
             return;
         }
 
@@ -111,8 +117,10 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
     {
         $taskId = $args[0] ?? null;
         if (!$taskId) {
-            echo "Error: Task ID is required for 'mark-done' action.
-                use 'php task-cli.php help' for usage instructions.\n";
+            echo <<<ERROR
+                Error: Task description is required for 'mark-done' action.
+                use 'php task-cli.php help' for usage instructions.\n
+                ERROR;
             return;
         }
 
@@ -131,8 +139,10 @@ final readonly class TaskTrackerCLIHandler implements TaskTrackerIOHandlerInterf
     {
         $taskId = $args[0] ?? null;
         if (!$taskId) {
-            echo "Error: Task ID is required for 'mark-in-progress' action.
-                use 'php task-cli.php help' for usage instructions.\n";
+            echo <<<ERROR
+                Error: Task description is required for 'mark-in-progress' action.
+                use 'php task-cli.php help' for usage instructions.\n
+                ERROR;
             return;
         }
 
