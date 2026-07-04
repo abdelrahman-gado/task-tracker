@@ -1,7 +1,7 @@
 # task-tracker
 PHP CLI task tracker project for https://roadmap.sh/projects/task-tracker
 
-## Perquisites
+## Prerequisites
 1. Docker
 2. Docker compose
 
